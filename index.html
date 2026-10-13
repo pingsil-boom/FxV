@@ -430,7 +430,7 @@ margin-bottom: 16px;
 .contact { background-color: var(--primary-color); color: var(--text-light); }
 .contact .section-title { color: var(--text-light); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 50px; } }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 50px; } }
 .contact-info p { font-size: 19px; margin-bottom: 28px; color: rgba(255, 255, 255, 0.85); }
 .contact-details { margin-top: 40px; }
 .contact-item { margin-bottom: 20px; font-size: 17px; display: flex; align-items: center; gap: 14px; color: rgba(255, 255, 255, 0.9); }
