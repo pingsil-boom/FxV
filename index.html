@@ -110,6 +110,45 @@ text-transform: uppercase;
 color: var(--accent-color);
 }
 
+/* Menu compatto solo su smartphone molto stretti (fino a 375px). */
+.nav-toggle { display: none; }
+@media (max-width: 375px) {
+  .header-flex { position: relative; }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font: 600 15px var(--font-body);
+    cursor: pointer;
+  }
+  .nav-toggle-symbol { font-size: 21px; line-height: 1; width: 20px; text-align: center; }
+  .nav-toggle:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 3px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 0;
+    right: 0;
+    padding: 8px 0;
+    background: #0F172A;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 10px;
+    box-shadow: 0 12px 25px rgba(0,0,0,.2);
+  }
+  .nav-links.is-open { display: flex; flex-direction: column; }
+  .nav-links a {
+    display: block;
+    margin: 0;
+    padding: 11px 18px;
+  }
+  .nav-links a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: -3px; }
+}
+
 /* HERO SECTION - SLIDE 1 */
 .hero {
 position: relative;
@@ -380,7 +419,8 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 <header>
 <div class="container header-flex">
 <a href="#" class="logo">FxV</a>
-<nav class="nav-links">
+<button type="button" class="nav-toggle" aria-controls="site-navigation" aria-expanded="false" aria-label="Apri il menu di navigazione"><span class="nav-toggle-symbol" aria-hidden="true">☰</span><span>Menu</span></button>
+<nav class="nav-links" id="site-navigation">
 <a href="#chi-siamo">Chi Siamo</a>
 <a href="#macro-aree">Programmi</a>
 <a href="#metodo">Metodo</a>
@@ -599,6 +639,40 @@ Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" style
 </footer>
 
 <script>
+// Navigazione compatta: apertura e chiusura solo fino a 375px.
+(function () {
+  const button = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('site-navigation');
+  if (!button || !nav) return;
+
+  function setMenuOpen(open) {
+    nav.classList.toggle('is-open', open);
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Chiudi il menu di navigazione' : 'Apri il menu di navigazione');
+    button.querySelector('.nav-toggle-symbol').textContent = open ? '×' : '☰';
+  }
+  button.addEventListener('click', function () {
+    setMenuOpen(button.getAttribute('aria-expanded') !== 'true');
+  });
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () { setMenuOpen(false); });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+      setMenuOpen(false);
+      button.focus();
+    }
+  });
+  document.addEventListener('click', function (event) {
+    if (button.getAttribute('aria-expanded') === 'true' && !button.contains(event.target) && !nav.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 375 && button.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
+  });
+})();
+
 let fxvLastFocusedElement = null;
 let fxvOpenModal = null;
 
