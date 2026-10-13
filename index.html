@@ -149,6 +149,31 @@ color: var(--accent-color);
   .nav-links a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: -3px; }
 }
 
+/* Accessibilità: salto al contenuto e focus da tastiera. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 10001;
+  padding: 12px 18px;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #0F172A;
+  font-weight: 700;
+}
+.skip-link:focus-visible { top: 12px; }
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
+  outline: 3px solid #0F766E;
+  outline-offset: 3px;
+}
+header a:focus-visible, .contact a:focus-visible, footer a:focus-visible,
+.nav-toggle:focus-visible { outline-color: #FB923C; }
+footer strong { color: #FFFFFF; }
+@media (prefers-reduced-motion: reduce) {
+  html, * { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
 /* HERO SECTION - SLIDE 1 */
 .hero {
 position: relative;
@@ -187,7 +212,7 @@ letter-spacing: 4px;
 .btn-main {
 display: inline-block;
 background-color: var(--accent-color);
-color: var(--text-light);
+color: var(--primary-color);
 text-decoration: none;
 padding: 20px 45px;
 font-size: 18px;
@@ -211,7 +236,7 @@ box-shadow: 0 6px 28px rgba(249, 115, 22, 0.6);
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
 .section-tag {
-color: var(--secondary-color); font-weight: 700; text-transform: uppercase;
+color: #0F766E; font-weight: 700; text-transform: uppercase;
 font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; display: block;
 }
 .section-title {
@@ -311,7 +336,7 @@ margin-bottom: 8px;
 }
 .read-more {
 font-size: 14px;
-color: var(--accent-color);
+color: #B45309;
 font-weight: 700;
 text-transform: uppercase;
 }
@@ -355,7 +380,7 @@ position: absolute;
 top: 20px;
 right: 25px;
 font-size: 32px;
-color: #94A3B8;
+color: #475569;
 cursor: pointer;
 transition: color 0.2s;
 line-height: 1;
@@ -374,7 +399,7 @@ border: 4px solid var(--secondary-color);
 margin-bottom: 20px;
 }
 .modal-role {
-color: var(--secondary-color);
+color: #0F766E;
 font-weight: 700;
 font-size: 14px;
 text-transform: uppercase;
@@ -411,11 +436,12 @@ margin-bottom: 16px;
 .form-notice.error { background-color: #fef2f2; color: #991b1b; }
 
 /* FOOTER */
-footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px 0; font-size: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px 0; font-size: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
 </style>
 </head>
 <body>
 
+<a href="#contenuto" class="skip-link">Vai al contenuto principale</a>
 <header>
 <div class="container header-flex">
 <a href="#" class="logo">FxV</a>
@@ -430,6 +456,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 </header>
 
+<main id="contenuto">
 <section class="hero">
 <div class="container">
 <div class="hero-content">
@@ -617,7 +644,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 25px;">
 <input type="checkbox" id="privacy-check" name="presa_visione_privacy" value="si" required style="width: auto; margin-top: 5px; cursor: pointer;">
 <label for="privacy-check" style="font-weight: normal; font-size: 14px; color: #475569; line-height: 1.4; cursor: pointer;">
-Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">Informativa sulla Privacy</a>.
+Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" rel="noopener noreferrer" aria-label="Informativa sulla Privacy (si apre in una nuova scheda)" style="color: #0F766E; text-decoration: underline;">Informativa sulla Privacy</a>.
 </label>
 </div>
 <button type="submit" class="btn-main" style="width: 100%; border-radius: 8px;">Richiedi Consulenza Dedicata</button>
@@ -627,6 +654,7 @@ Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" style
 </div>
 </div>
 </section>
+</main>
 
 <footer>
 <div class="container">
