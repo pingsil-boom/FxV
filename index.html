@@ -186,6 +186,13 @@ align-items: center;
 color: var(--text-light);
 text-align: center;
 }
+/* Su smartphone si richiede una versione più leggera della stessa fotografia hero. */
+@media (max-width: 600px) {
+  .hero {
+    background-image: linear-gradient(rgba(15, 23, 42, 0.70), rgba(15, 23, 42, 0.85)),
+      url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=75');
+  }
+}
 .hero-content {
 max-width: 900px;
 margin: 0 auto;
@@ -477,7 +484,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px
 <p>Non facciamo distinzioni tra chi punta al podio e chi desidera semplicemente mantenere la propria autonomia nel tempo; a tutti offriamo lo stesso alto livello di attenzione, con proposte create su misura. Il nostro obiettivo è aiutarti a muoverti meglio, per vivere meglio.</p>
 </div>
 <div class="about-image">
-<img src="logo-FxV-Photoroom.webp" alt="Logo FxV">
+<img src="logo-FxV-Photoroom.webp" alt="Logo FxV" loading="lazy" decoding="async">
 </div>
 </div>
 </div>
@@ -562,7 +569,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px
 
 <div class="team-grid">
 <div class="team-card-small" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modal-federico" aria-label="Leggi il curriculum di Federico Cannavicci" onclick="openModal('modal-federico')">
-<img class="team-avatar-small" src="federico.webp" alt="Federico - Fondatore FxV">
+<img class="team-avatar-small" src="federico.webp" alt="Federico - Fondatore FxV" loading="lazy" decoding="async">
 <div class="team-info-small">
 <h3>Federico Cannavicci</h3>
 <p>Specialista in Metodologia dell'Allenamento e Performance d'Élite.</p>
@@ -571,7 +578,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px
 </div>
 
 <div class="team-card-small" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modal-valerio" aria-label="Leggi il curriculum di Valerio Pignalosa Conti" onclick="openModal('modal-valerio')">
-<img class="team-avatar-small" src="valerio.webp" alt="Valerio - Fondatore FxV">
+<img class="team-avatar-small" src="valerio.webp" alt="Valerio - Fondatore FxV" loading="lazy" decoding="async">
 <div class="team-info-small">
 <h3>Valerio Pignalosa Conti</h3>
 <p>Esperto in Chinesiologia, Posturologia e Performance Sportiva.</p>
@@ -585,7 +592,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px
 <div id="modal-federico" class="modal-overlay" aria-hidden="true" onclick="closeModalOutside(event, 'modal-federico')">
 <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-federico-title">
 <button type="button" class="close-modal" aria-label="Chiudi il curriculum di Federico" onclick="closeModal('modal-federico')">&times;</button>
-<img class="modal-avatar" src="federico.webp" alt="Federico">
+<img class="modal-avatar" src="federico.webp" alt="Federico" loading="lazy" decoding="async">
 <h3 id="modal-federico-title" class="section-title" style="margin-bottom: 5px;">Federico</h3>
 <span class="modal-role">ESPERTO IN SCIENZE MOTORIE, METODOLOGIA DELL'ALLENAMENTO E GINNASTICA PER LA TERZA ETÀ</span>
 <p class="modal-bio">Specialista nella programmazione motoria e nel condizionamento fisico, con una solida base accademica acquisita con la Laurea in Scienze Motorie e una forte specializzazione come Istruttore di ginnastica per la terza età, certificata da diploma riconosciuto ACSI/CONI. Pone massima enfasi sull'applicazione scientifica del movimento finalizzata al mantenimento funzionale in età avanzata e all'abbassamento del rischio di caduta, adattando la metodologia dell'allenamento alle specifiche esigenze motorie e di wellness di questa fascia d'età.</p>
@@ -595,7 +602,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.65); padding: 45px
 <div id="modal-valerio" class="modal-overlay" aria-hidden="true" onclick="closeModalOutside(event, 'modal-valerio')">
 <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-valerio-title">
 <button type="button" class="close-modal" aria-label="Chiudi il curriculum di Valerio" onclick="closeModal('modal-valerio')">&times;</button>
-<img class="modal-avatar" src="valerio.webp" alt="Valerio Pignalosa Conti">
+<img class="modal-avatar" src="valerio.webp" alt="Valerio Pignalosa Conti" loading="lazy" decoding="async">
 <h3 id="modal-valerio-title" class="section-title" style="margin-bottom: 5px;">Valerio Pignalosa Conti</h3>
 <span class="modal-role">Esperto in Chinesiologia, Posturologia e Performance Sportiva</span>
 <p class="modal-bio">Laureato in Scienze Motorie, Valerio integra esperienza sportiva, formazione posturale, massaggio sportivo, rieducazione funzionale e preparazione fisica. Dal 2007 lavora nel mondo della pallavolo come allenatore, occupandosi di programmazione dell’allenamento, gestione del gruppo, sviluppo delle qualità motorie e adattamento del lavoro alle esigenze degli atleti.</p>
