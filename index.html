@@ -344,6 +344,8 @@ margin-bottom: 16px;
 .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-color); font-size: 15px; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px; border: 2px solid #E2E8F0; border-radius: 8px; font-size: 16px; color: var(--text-dark); font-family: var(--font-body); transition: border-color 0.3s, box-shadow 0.3s; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15); }
+.form-notice { margin-top: 16px; padding: 14px; border-radius: 8px; background-color: #f0fdf4; color: #166534; font-size: 15px; }
+.form-notice.error { background-color: #fef2f2; color: #991b1b; }
 
 /* FOOTER */
 footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px 0; font-size: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -524,18 +526,18 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 
 <div class="contact-form">
-<form action="#" method="POST" onsubmit="alert('Richiesta ricevuta con successo. Federico o Valerio ti contatteranno personalmente entro 24 ore lavorative.'); return false;">
+<form id="fxv-contact-form" action="https://formspree.io/f/xqpeyzzz" method="POST">
 <div class="form-group">
 <label for="nome">Nome e Cognome</label>
-<input type="text" id="nome" placeholder="Es. Marco Verdi" required>
+<input type="text" id="nome" name="nome" placeholder="Es. Marco Verdi" required>
 </div>
 <div class="form-group">
 <label for="email">Il tuo indirizzo Email</label>
-<input type="email" id="email" placeholder="Es. marco.verdi@email.com" required>
+<input type="email" id="email" name="email" placeholder="Es. marco.verdi@email.com" required>
 </div>
 <div class="form-group">
 <label for="macroarea">Qual è la tua macro-area di interesse?</label>
-<select id="macroarea" required>
+<select id="macroarea" name="macroarea" required>
 <option value="">Seleziona un'opzione...</option>
 <option value="performance">Area Performance (Atleti / Agonismo)</option>
 <option value="salute">Area Salute e Longevità (Terza Età / Autonomia)</option>
@@ -544,16 +546,17 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 <div class="form-group">
 <label for="messaggio">Descrivi brevemente la tua situazione o i tuoi obiettivi</label>
-<textarea id="messaggio" rows="4" placeholder="Es. Sono un atleta agonista di tennis e vorrei.../ Sono una signora di 76 anni e il medico ha riconosciuto dei fattori di rischio di caduta..." required></textarea>
+<textarea id="messaggio" name="messaggio" rows="4" placeholder="Es. Sono un atleta agonista di tennis e vorrei.../ Sono una signora di 76 anni e il medico ha riconosciuto dei fattori di rischio di caduta..." required></textarea>
 </div>
 <!-- Checkbox obbligatoria per la Privacy Policy -->
 <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 25px;">
-<input type="checkbox" id="privacy-check" required style="width: auto; margin-top: 5px; cursor: pointer;">
+<input type="checkbox" id="privacy-check" name="presa_visione_privacy" value="si" required style="width: auto; margin-top: 5px; cursor: pointer;">
 <label for="privacy-check" style="font-weight: normal; font-size: 14px; color: #475569; line-height: 1.4; cursor: pointer;">
-Ho letto e accetto l'<a href="privacy.html" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">Informativa sulla Privacy</a> e acconsento al trattamento dei dati per essere ricontattato.
+Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">Informativa sulla Privacy</a>.
 </label>
 </div>
 <button type="submit" class="btn-main" style="width: 100%; border-radius: 8px;">Richiedi Consulenza Dedicata</button>
+<p id="fxv-form-status" role="status" aria-live="polite" class="form-notice" hidden></p>
 </form>
 </div>
 </div>
@@ -574,6 +577,43 @@ Ho letto e accetto l'<a href="privacy.html" target="_blank" style="color: var(--
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 function closeModalOutside(event, id) { if (event.target.id === id) closeModal(id); }
+
+(function () {
+  const form = document.getElementById('fxv-contact-form');
+  const status = document.getElementById('fxv-form-status');
+  if (!form || !status) return;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    status.hidden = true;
+    status.textContent = '';
+    submitButton.disabled = true;
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Invio in corso...';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error('Invio non riuscito');
+      status.classList.remove('error');
+      status.textContent = 'Richiesta inviata correttamente. Ti ricontatteremo appena possibile.';
+      form.reset();
+    } catch (error) {
+      status.classList.add('error');
+      status.textContent = 'Non è stato possibile inviare la richiesta. Riprova più tardi oppure utilizza i recapiti indicati.';
+    } finally {
+      status.hidden = false;
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  });
+})();
 </script>
 </body>
 </html>
