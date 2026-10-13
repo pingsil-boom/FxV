@@ -231,6 +231,7 @@ transition: transform 0.3s, box-shadow 0.3s;
 transform: translateY(-5px);
 box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
 }
+.team-card-small:focus-visible { outline: 3px solid var(--secondary-color); outline-offset: 4px; }
 @media (max-width: 550px) {
 .team-card-small { flex-direction: column; text-align: center; }
 }
@@ -305,8 +306,12 @@ color: #94A3B8;
 cursor: pointer;
 transition: color 0.2s;
 line-height: 1;
+background: none;
+border: 0;
+font-family: inherit;
 }
 .close-modal:hover { color: var(--accent-color); }
+.close-modal:focus-visible { outline: 3px solid var(--secondary-color); outline-offset: 4px; }
 .modal-avatar {
 width: 140px;
 height: 140px;
@@ -330,6 +335,10 @@ font-size: 16px;
 line-height: 1.8;
 text-align: left;
 margin-bottom: 16px;
+}
+@media (max-width: 550px) {
+.modal-content { padding: 42px 22px 28px; }
+.close-modal { top: 10px; right: 15px; }
 }
 
 /* CONTATTI - SLIDE 6 */
@@ -471,7 +480,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 
 <div class="team-grid">
-<div class="team-card-small" onclick="openModal('modal-federico')">
+<div class="team-card-small" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modal-federico" aria-label="Leggi il curriculum di Federico Cannavicci" onclick="openModal('modal-federico')">
 <img class="team-avatar-small" src="federico.webp" alt="Federico - Fondatore FxV">
 <div class="team-info-small">
 <h3>Federico Cannavicci</h3>
@@ -480,7 +489,7 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 </div>
 
-<div class="team-card-small" onclick="openModal('modal-valerio')">
+<div class="team-card-small" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modal-valerio" aria-label="Leggi il curriculum di Valerio Pignalosa Conti" onclick="openModal('modal-valerio')">
 <img class="team-avatar-small" src="valerio.webp" alt="Valerio - Fondatore FxV">
 <div class="team-info-small">
 <h3>Valerio Pignalosa Conti</h3>
@@ -492,21 +501,21 @@ footer { background-color: #090D16; color: rgba(255,255,255,0.45); padding: 45px
 </div>
 </section>
 
-<div id="modal-federico" class="modal-overlay" onclick="closeModalOutside(event, 'modal-federico')">
-<div class="modal-content">
-<span class="close-modal" onclick="closeModal('modal-federico')">&times;</span>
+<div id="modal-federico" class="modal-overlay" aria-hidden="true" onclick="closeModalOutside(event, 'modal-federico')">
+<div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-federico-title">
+<button type="button" class="close-modal" aria-label="Chiudi il curriculum di Federico" onclick="closeModal('modal-federico')">&times;</button>
 <img class="modal-avatar" src="federico.webp" alt="Federico">
-<h3 class="section-title" style="margin-bottom: 5px;">Federico</h3>
+<h3 id="modal-federico-title" class="section-title" style="margin-bottom: 5px;">Federico</h3>
 <span class="modal-role">ESPERTO IN SCIENZE MOTORIE, METODOLOGIA DELL'ALLENAMENTO E GINNASTICA PER LA TERZA ETÀ</span>
 <p class="modal-bio">Specialista nella programmazione motoria e nel condizionamento fisico, con una solida base accademica acquisita con la Laurea in Scienze Motorie e una forte specializzazione come Istruttore di ginnastica per la terza età, certificata da diploma riconosciuto ACSI/CONI. Pone massima enfasi sull'applicazione scientifica del movimento finalizzata al mantenimento funzionale in età avanzata e all'abbassamento del rischio di caduta, adattando la metodologia dell'allenamento alle specifiche esigenze motorie e di wellness di questa fascia d'età.</p>
 </div>
 </div>
 
-<div id="modal-valerio" class="modal-overlay" onclick="closeModalOutside(event, 'modal-valerio')">
-<div class="modal-content">
-<span class="close-modal" onclick="closeModal('modal-valerio')">&times;</span>
+<div id="modal-valerio" class="modal-overlay" aria-hidden="true" onclick="closeModalOutside(event, 'modal-valerio')">
+<div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-valerio-title">
+<button type="button" class="close-modal" aria-label="Chiudi il curriculum di Valerio" onclick="closeModal('modal-valerio')">&times;</button>
 <img class="modal-avatar" src="valerio.webp" alt="Valerio Pignalosa Conti">
-<h3 class="section-title" style="margin-bottom: 5px;">Valerio Pignalosa Conti</h3>
+<h3 id="modal-valerio-title" class="section-title" style="margin-bottom: 5px;">Valerio Pignalosa Conti</h3>
 <span class="modal-role">Esperto in Chinesiologia, Posturologia e Performance Sportiva</span>
 <p class="modal-bio">Laureato in Scienze Motorie, Valerio integra esperienza sportiva, formazione posturale, massaggio sportivo, rieducazione funzionale e preparazione fisica. Dal 2007 lavora nel mondo della pallavolo come allenatore, occupandosi di programmazione dell’allenamento, gestione del gruppo, sviluppo delle qualità motorie e adattamento del lavoro alle esigenze degli atleti.</p>
 </div>
@@ -576,9 +585,69 @@ Dichiaro di aver preso visione dell'<a href="privacy.html" target="_blank" style
 </footer>
 
 <script>
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-function closeModalOutside(event, id) { if (event.target.id === id) closeModal(id); }
+let fxvLastFocusedElement = null;
+let fxvOpenModal = null;
+
+function openModal(id) {
+  const overlay = document.getElementById(id);
+  if (!overlay) return;
+  fxvLastFocusedElement = document.activeElement;
+  fxvOpenModal = overlay;
+  overlay.classList.add('active');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  overlay.querySelector('.close-modal').focus();
+}
+
+function closeModal(id) {
+  const overlay = document.getElementById(id);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  fxvOpenModal = null;
+  if (fxvLastFocusedElement && typeof fxvLastFocusedElement.focus === 'function') {
+    fxvLastFocusedElement.focus();
+  }
+  fxvLastFocusedElement = null;
+}
+
+function closeModalOutside(event, id) {
+  if (event.target.id === id) closeModal(id);
+}
+
+// Anche i comandi della tastiera possono aprire i curriculum.
+document.querySelectorAll('.team-card-small[role="button"]').forEach(function (card) {
+  card.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      card.click();
+    }
+  });
+});
+
+// Esc chiude il popup e Tab mantiene il focus all'interno.
+document.addEventListener('keydown', function (event) {
+  if (!fxvOpenModal) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeModal(fxvOpenModal.id);
+    return;
+  }
+  if (event.key !== 'Tab') return;
+  const elements = Array.from(fxvOpenModal.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])'))
+    .filter(function (element) { return !element.disabled && element.getClientRects().length > 0; });
+  if (!elements.length) return;
+  const first = elements[0];
+  const last = elements[elements.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
 
 (function () {
   const form = document.getElementById('fxv-contact-form');
