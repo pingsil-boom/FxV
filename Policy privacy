@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informativa privacy | FxV – La Potenza del Movimento</title>
+<meta name="robots" content="index,follow">
+<style>
+:root{--navy:#0F172A;--teal:#0D9488;--text:#1E293B;--bg:#F1F5F9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+header{background:var(--navy);padding:16px 24px}header a{color:#fff;font-size:24px;font-weight:bold;text-decoration:none}
+main{max-width:850px;margin:36px auto 54px;padding:36px 42px;background:white;border-radius:14px}
+h1,h2{color:var(--navy);line-height:1.25}h1{font-size:32px}h2{margin-top:30px;font-size:21px}
+a{color:#08766d}footer{text-align:center;padding:24px;background:var(--navy);color:white}footer a{color:#fff}
+@media(max-width:600px){main{margin:15px 12px 32px;padding:24px 18px}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header><a href="index.html">FxV</a></header>
+<main>
+<h1>Informativa sul trattamento dei dati personali</h1>
+<p>Questa informativa riguarda le richieste inviate attraverso il modulo contatti del sito <strong>FxV – La Potenza del Movimento</strong>, secondo l'articolo 13 del Regolamento (UE) 2016/679 (GDPR).</p>
+<h2>1. Titolare e contatti</h2>
+<p>Il titolare del trattamento relativo al modulo contatti è <strong>Valerio Pignalosa Conti</strong>. Per informazioni e richieste relative ai dati personali: <a href="mailto:info@potenzadelmovimento.it">info@potenzadelmovimento.it</a>.</p>
+<h2>2. Dati raccolti</h2>
+<p>Il modulo richiede nome e cognome, indirizzo email, area di interesse e messaggio. Possono inoltre essere trattati dati tecnici necessari al funzionamento e alla sicurezza dei servizi utilizzati, quali indirizzo IP e informazioni sulla connessione.</p>
+<p><strong>Non inserire diagnosi, patologie, referti o altre informazioni relative alla salute.</strong> Il modulo è destinato esclusivamente a richieste iniziali di informazioni.</p>
+<h2>3. Finalità e base giuridica</h2>
+<p>Utilizziamo i dati per rispondere alle richieste, fornire informazioni sui servizi e organizzare eventuali appuntamenti. Per le richieste riguardanti servizi professionali e l'avvio di un possibile rapporto, il trattamento si basa sull'articolo 6, paragrafo 1, lettera b), del GDPR (misure precontrattuali su richiesta dell'interessato). Non utilizziamo i dati raccolti con questo modulo per inviare newsletter o pubblicità.</p>
+<h2>4. Chi può accedere e servizi coinvolti</h2>
+<p>Le richieste sono ricevute all'indirizzo condiviso <a href="mailto:info@potenzadelmovimento.it">info@potenzadelmovimento.it</a> e possono essere consultate da Valerio Pignalosa Conti e Federico Cannavicci per rispondere e indirizzare la richiesta al professionista pertinente.</p>
+<p>Per ricevere e inoltrare i messaggi utilizziamo <strong>Formspree</strong> (Formspree, Inc.). Il sito è pubblicato tramite <strong>GitHub Pages</strong> e utilizza <strong>Google Fonts</strong> per i caratteri tipografici. Questi fornitori possono trattare anche informazioni tecniche durante il funzionamento dei rispettivi servizi.</p>
+<h2>5. Conferimento dei dati</h2>
+<p>L'invio di una richiesta è facoltativo. Per inviarla attraverso il modulo è necessario compilare i campi contrassegnati come obbligatori. È sempre possibile contattarci direttamente tramite l'indirizzo email pubblicato sul sito.</p>
+<h2>6. Conservazione</h2>
+<p>Le richieste che non danno luogo a un rapporto professionale vengono conservate per il tempo necessario alla loro gestione e, secondo il criterio adottato, non oltre sei mesi dalla conclusione del contatto, salvo specifiche esigenze o obblighi giuridici che giustifichino un periodo diverso. I dati eventualmente conservati dai fornitori tecnici seguono anche le rispettive condizioni di servizio.</p>
+<h2>7. Trattamenti all'estero</h2>
+<p>L'utilizzo di fornitori esterni, tra cui Formspree, può comportare trattamenti o trasferimenti di dati al di fuori dello Spazio economico europeo, inclusi gli Stati Uniti. Le condizioni e le garanzie dichiarate dai fornitori sono descritte nelle rispettive informative. Per ulteriori informazioni è possibile contattare il titolare all'indirizzo sopra indicato.</p>
+<h2>8. Diritti della persona interessata</h2>
+<p>Nei casi e nei limiti previsti dal GDPR, è possibile esercitare i diritti di accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei dati scrivendo a <a href="mailto:info@potenzadelmovimento.it">info@potenzadelmovimento.it</a>. È inoltre possibile presentare reclamo al <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener noreferrer">Garante per la protezione dei dati personali</a>.</p>
+<h2>9. Decisioni automatizzate</h2>
+<p>Le richieste ricevute tramite il modulo non sono utilizzate per assumere decisioni basate unicamente su trattamenti automatizzati né per effettuare profilazione.</p>
+<h2>10. Aggiornamento</h2>
+<p>Ultimo aggiornamento: 13 ottobre 2026.</p>
+</main>
+<footer><a href="index.html">Torna al sito FxV</a> · <a href="cookie.html">Cookie Policy</a></footer>
+</body>
+</html>
